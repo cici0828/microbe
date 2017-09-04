@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.system.mapper.ModuleMapper">
+
+	<resultMap type="Module" id="ModuleResultMap">
+		<result column="moduleid" property="moduleid" />
+		<result column="modulename" property="modulename" />
+		<collection property="menuList" ofType="Menu">
+			<id column="billid" property="billid" />
+			<result column="billid" property="billid" />
+			<result column="billname" property="billname" />
+			<result column="url" property="url" />
+		</collection>
+	</resultMap>
+
+	<select id="getModuleByRoleID" parameterType="int" resultMap="ModuleResultMap">
+		select
+		m.modulename,m.moduleid,b.billid,b.billname,b.moduleid as
+		billmodulei,b.url from tb_bill b,tb_module m, tb_rolebill rb
+		where
+		b.moduleid=m.moduleid
+		and rb.billid=b.billid
+		and rb.roldid=#{value}
+		order by m.isortid,b.isortid
+	</select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<configuration>
+	<typeAliases>
+		<package name="net.dagene.pmis.system.po" />
+		<package name="net.dagene.pmis.system.vo" />
+		<package name="net.dagene.pmis.pathology.po" />
+		<package name="net.dagene.pmis.pathology.vo" />
+		<package name="net.dagene.pmis.common.po" />
+		<package name="net.dagene.pmis.common.vo" />
+		<package name="net.dagene.pmis.pathology.model" />
+		<package name="net.dagene.microbe.po"/>
+		<package name="net.dagene.microbe.vo"/>
+	</typeAliases>
+</configuration>

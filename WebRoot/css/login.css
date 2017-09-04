@@ -1,0 +1,147 @@
+@CHARSET "UTF-8";
+#login_container {
+    /*	border: 1px solid blue;*/
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: auto;
+    background: URL(pic/login_bk.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#login_head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+#login_main {
+    position: absolute;
+    top: 100px;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+}
+
+#login_footer {
+    position: absolute;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #D3D3D3;
+}
+
+#login_panel {
+    border: 1px solid #666666;
+    width: 300px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 10px;
+    position: absolute;
+    filter: progid: DXImageTransform.Microsoft.Shadow(color=#909090, direction=120, strength=3);
+    -moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+}
+
+#login_inner {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    /*background: white;*/
+}
+
+#dian_logo {
+    width: 120px;
+    height: 50px;
+    left: 50px;
+    position: relative;
+    top: 45px
+}
+
+#system_title {
+    display: inline;
+    top: 5px;
+    position: relative;
+    left: 180px;
+    position: relative;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+#copyright {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    font-size: 13px;
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    text-align: center;
+}
+
+#explorer {
+    position: relative;
+    width: 170px;
+    margin: auto;
+    text-align: center;
+}
+
+#explorer img {
+    max-height: 30px;
+    max-width: 30px;
+    display: inline-block;
+}
+
+#explorer span {
+    float: left;
+    font-size: 13px;
+    display: inline;
+    margin-top: 7px;
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.login_label {
+    font-weight: bold;
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.login_control {
+    padding-bottom: 10px;
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.input {
+    box-sizing: border-box;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    padding: 0 10px;
+    outline: none;
+    height: 40px;
+    width: 270px;
+}
+
+.input.full {
+    width: 100%;
+}
+
+.login_btn {
+    width: 100%;
+    left: 0;
+    height: 80px;
+    margin-top: 10px;
+    border-top: 1px solid #d4d4d4;
+    padding: 15px 1px;
+}

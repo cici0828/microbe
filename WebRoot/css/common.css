@@ -1,0 +1,25 @@
+.da_container {
+	width: 1500px;
+}
+
+.da_label {
+	font-weight: bold;
+	font-size: 14px;
+	font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.da_label1 {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.da-panel-body{
+	padding: 10px;
+}
+
+.da-control-label{
+	padding-top: 7px;
+	text-align: right;
+}

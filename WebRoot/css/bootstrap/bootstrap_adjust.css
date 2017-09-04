@@ -1,0 +1,31 @@
+body {
+    background-color: #E7F7D7; 
+	/*background-color: #F9F9F9;#E8E8E8*/
+    font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+a {
+    color: black;
+}
+
+.badge{
+	background-color: #FF9966;
+}
+
+.navbar{
+	height: 35px;
+	min-height: 35px;
+}
+
+.nav>li{
+	height: 35px;
+}
+
+.navbar-nav>li>.link{
+	line-height: 0.22;
+}
+
+.navbar-nav>li>a{
+	line-height: 0px;
+}
+

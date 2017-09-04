@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.common.mapper.PatientInfoMapper">
+
+	<!-- 获取基本信息 -->
+	<resultMap type="PatientinfoCustom" id="getPatientinfoCustomByBarcodeMap"
+		autoMapping="true"></resultMap>
+	<select id="getPatientinfoCustomByBarcode" parameterType="String"
+		resultMap="getPatientinfoCustomByBarcodeMap">
+		SELECT * FROM patientinformation WHERE barcode=#{barcode} order by origrec desc
+	</select>
+
+
+
+	<!-- 病人基本信息-->
+	<resultMap type="PatientinfoCustom" id="patientinfoCustom"
+		autoMapping="true">
+		<result column="origrec" property="origrec" />
+		<result column="porigrec" property="origrec" />
+	</resultMap>
+
+	<!-- 测试 -->
+	<resultMap type="Patienttests" id="tests" autoMapping="true">
+		<result column="origrec" property="origrec" />
+		<result column="pt_origrec" property="origrec" />
+		<result column="ptorigrec" property="origrec" />
+	</resultMap>
+
+	<!-- 病人基本信息+测试-->
+	<resultMap type="PatientinfoCustom" id="patientinfoTest"
+		autoMapping="true" extends="patientinfoCustom">
+		<collection property="patienttests" resultMap="tests"></collection>
+	</resultMap>
+
+</mapper>

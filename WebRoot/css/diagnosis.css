@@ -1,0 +1,23 @@
+.detail_row_style{margin:3px 0px; padding:3px 0px; font-size:14px; border-bottom: 1px dotted #eee; line-height:1.2em;}
+.detail_row_style textarea{width:100%; border:none; outline:none; resize:none;}
+.ico_box{padding:5px;}
+.ico_box .ui-icon{float:left;}
+
+.grid_detail{border:1px solid #ccc;}
+.grid_detail ul{margin:0px; padding:0px;}
+.grid_detail li{margin:0px; padding:10px; list-style:none; height:80px; width:80px; float:left;}
+.grid_detail li img{margin:0px; padding:5px; width:60px; height:60px; border:1px solid #ccc;}
+
+
+.none{display:none;}
+.dazd_title{padding:0px 10px; line-height:30px; font-size:15px; font-weight:bold; background:#eee; border-bottom:1px solid #ccc;}
+.dazd_split_sub_warp{border:1px solid #ccc;}
+
+.scroll_auto{overflow:auto;}
+.tips{padding:5px 10px; height:40px; overflow:hidden;}
+.a_link{margin:0px; padding:0px; line-height:22px;}
+
+.add_button_r{float:right;}
+.diagnosisTitle{padding: 1px 8px}
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.pathology.mapper.PathologyMapper">
+	<select id="getAttcPicInfoListByFolderno" parameterType="string"
+		resultType="AttcPicture">
+		select id,folderno,ordno,type,sortorder,display,describe
+		from t_attc_picture where folderno=#{value} order by sortorder
+	</select>
+
+	<select id="getAttcPicByID" parameterType="string" resultType="AttcPicture">
+		select id,picture from t_pty_slice where id=#{value}
+	</select>
+	
+	<delete id="deleteDgsinfo" parameterType="string">
+	    delete from t_pathology_dgsinfo where folderno=#{value}
+	</delete>
+	
+	<delete id="deleteAttcPic" parameterType="string">
+	    delete from t_attc_picture where folderno=#{value}
+	</delete>
+	
+	<insert id="insertAttcPic" parameterType="AttcPictureModel">
+	    insert into t_attc_picture(id, folderno, display, describe, picture, type)
+	    values(#{id,jdbcType=VARCHAR},#{folderno,jdbcType=VARCHAR},'1',#{describe,jdbcType=VARCHAR},#{picture,jdbcType=BLOB},'1')
+	
+	</insert>
+	
+	<insert id="insertDgsinfo" parameterType="DgsinfoModel">
+	     insert into t_pathology_dgsinfo(id, barcode, folderno, repidea,ordno)
+	     values(#{id,jdbcType=VARCHAR},#{barcode,jdbcType=VARCHAR},#{folderno,jdbcType=VARCHAR},#{repidea,jdbcType=VARCHAR}
+	     ,#{ordno,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="getOrdno" parameterType="String" resultType="String">
+	    select o.ordno from orders o where folderno=#{value}
+	</select>
+</mapper>

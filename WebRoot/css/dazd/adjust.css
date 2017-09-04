@@ -1,0 +1,12 @@
+
+.dazd-widget-header{
+	/*border: 1px solid #e78f08;
+	background: #f6a828 url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") 50% 50% repeat-x;*/
+	border:1px solid #bbb;
+	background: #ccc;
+	color: #ffffff;
+	font-weight: bold;
+}
+.dazd-widget-header a {
+	color: #ffffff;
+}

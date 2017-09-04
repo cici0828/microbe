@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.pathology.mapper.SliceMapper">
+	<select id="getUploadSliceList" resultType="SliceFileModel">
+		select barcode from slicefile where filestatus in (0, 1) group by barcode
+	</select>
+
+	<select id="getSliceListByBarcode" parameterType="string"
+		resultType="SliceFileModel">
+		select s.*, f.offset,f.counts from slicefile s, uploadfileinfo f
+		where s.id=f.sliecefileid
+		and s.barcode = ${value}
+	</select>
+
+</mapper>

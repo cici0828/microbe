@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.microbe.mapper.MicrobeMapper">
+	<resultMap type="QueryMicrobeResultVo" id="queryMicrobeResultVo"
+		autoMapping="true">
+		<id column="mguid" property="mguid" />
+		<collection property="detailList" ofType="MicrobeDetailPo"
+			column="mguid" autoMapping="true">
+		</collection>
+	</resultMap>
+	<select id="queryMicrobeResult" parameterType="QueryMicrobeParamVo"
+		resultMap="queryMicrobeResultVo">
+	<![CDATA[ 
+		select
+		p.origrec,p.barcode,p.patientname,p.age,p.ageunit,p.sex,p.collectddate,p.senddate,
+		p.doctor,p.clinicid,p.clinicname,p.diagnosis,p.comments,pt.testcode,pt.testno,pt.receiveddate,
+		mm.mguid, mm.reportdate,mm.microbecode,mm.remark,
+		mm.ifmasculine,
+		mm.checkby, 
+		mm.inputdate,mm.inputman,mm.inputmanduty,
+        mm.checkdate,mm.checkman,mm.checkmanduty,
+        mm.approvaldate, mm.approvalman,mm.approvalmanduty, 
+		md.* from
+		patientinformation p,
+		patienttests pt,
+		t_microbe_main mm,
+		t_microbe_detail md
+		where
+		p.origrec=pt.patientorigrec		
+		and pt.servgrp='微生物室'
+		and mm.mic_barcode=p.barcode
+		and pt.testcode = mm.testcode
+		and mm.mguid=md.mguid
+		and p.samplefrom=#{rasclientid}
+		and mm.reportdate>=to_date(#{beg_rptdate}||' 00:00:00','yyyy-mm-dd hh24:mi:ss')
+		and mm.reportdate<=to_date(#{end_rptdate}||' 23:59:59','yyyy-mm-dd hh24:mi:ss')
+		and mm.status='结果发布'
+		order by reportdate, barcode, pfn,md.id
+		]]>
+	</select>
+</mapper>

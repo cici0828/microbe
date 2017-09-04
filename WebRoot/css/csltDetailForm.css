@@ -1,0 +1,403 @@
+@CHARSET "UTF-8";
+
+#da_csltcontext {
+	width: 99%;
+	position: relatvie;
+	margin: auto;
+	overflow: auto;
+	margin-top: 2px;
+	margin-bottom: 2px;
+
+	/*border: 1px solid green;*/
+}
+
+.da_csltdetailform {
+	overflow: auto;
+	height: 91%;
+	border: 1px solid #D3D3D3;
+	/* 	background-color: F7F7F7; */
+}
+
+#da_csltdetailform_left {
+	margin-left: 5px;
+	margin-right: 5px;
+	width: 50%;
+	min-width: 500px;
+	max-width: 700px;
+	float: left;
+}
+
+#da_csltdetailform_right {
+	margin-right: 5px;
+	width: 48%;
+	float: right;
+}
+
+.da_csltdetailform_right_context {
+	height: 70%;
+	width: 48%;
+}
+
+.csltdetailfrom_left_context {
+	height: 100px;
+	margin-left: 15px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #D3D3D3;
+	overflow: auto;
+}
+
+.table_baseinfo { /* 	border: 1px solid #add9c0; */
+	width: 98%;
+	margin: auto;
+	height: 70px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+	font-size: 14px;
+	border-bottom: 1px dashed #D3D3D3;
+	margin-bottom: 2px;
+	word-break: break-all;
+}
+
+.table_baseinfo2 {
+	height: 55px;
+}
+
+.table_baseinfo3 {
+	height: 40px;
+	word-break: break-all;
+}
+
+.table_baseinfo td { /*border: 1px solid red;*/
+	
+}
+
+.table_baseinfo td:nth-child(1) {
+	width: 12%;
+}
+
+.table_baseinfo2 td:nth-child(1) {
+	width: 11%;
+	vertical-align: top;
+}
+
+.table_baseinfo2 tr:nth-child(1) {
+	height: 11px;
+}
+
+.table_baseinfo td:nth-child(2) {
+	width: 27%;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.table_baseinfo td:nth-child(3) {
+	width: 9%;
+}
+
+.table_baseinfo td:nth-child(4) {
+	
+}
+
+.table_baseinfo td:nth-child(5) {
+	width: 12%;
+}
+
+.table_baseinfo td:nth-child(6) {
+	width: 18%;
+}
+
+.table_short_slicepic_list {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: 20px;
+	position: relative;
+	margin-left: 5px;
+}
+
+.table_short_slicepic_list th {
+	border: 1px solid #ddd;
+}
+
+.table_short_slicepic_list td {
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+.table_short_slicepic_list tr td:nth-child(1) {
+	width: 20px;
+	vertical-align: middle;
+}
+
+.table_short_slicepic_list tr td:nth-child(2) {
+	width: 20px;
+}
+
+.table_short_slicepic_list tr td:nth-child(3) {
+	text-align: left;
+	width: 200px;
+}
+
+.table_short_slicepic_list tr td:nth-child(4) {
+	width: 100px;
+}
+
+.short_slicepic {
+	max-width: 70px;
+	max-height: 70px;
+}
+
+.table_baseinfo1 { /*border: 1px solid #add9c0;*/
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: 20px;
+	position: relative;
+	top: 2px;
+}
+
+.table_baseinfo1 td {
+	border: 1px solid red;
+	height: 25px;
+}
+
+.table_baseinfo1 tr td:nth-child(2) {
+	width: 10px;
+	background-color: blue;
+}
+
+.opencase {
+	display: inline;
+	float: left;
+}
+
+.commitcase {
+	display: inline;
+	float: left;
+}
+
+.da_csltdetail_result {
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #D3D3D3;
+	position: relative;
+	width: 60%;
+	height: 95%;
+	overflow: hide;
+}
+
+.da_csltdetail_result_input {
+	overflow: hidden;
+	resize: none;
+	width: 99%;
+	border: 1px solid #d9d9d9;
+	font-size: 14px;
+	outline: #4cc0c1;
+	word-wrap: break-word;
+	font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+#da_csltdetailform_right div {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+#da_reportArea {
+	margin: 5px 5px;
+	border: 1px solid #d9d9d9;
+	position: relative;
+}
+
+.da_reportPicAreaContainer {
+	margin: 5px 5px;
+	border: 1px solid #d9d9d9;
+	display: none;
+	overflow: hidden;
+	height: 270px;
+}
+
+.da_reportPicAreaScroll {
+	width: 84%;
+	border: 1px solid #d9d9d9;
+	overflow: hidden;
+	height: 95%;
+	float: left;
+	background-color: F7F7F7;
+}
+
+.da_reportPicAreaScroll_left {
+	width: 6%;
+	height: 95%;
+	float: left;
+}
+
+.da_reportPicAreaScroll_right {
+	width: 6%;
+	height: 95%;
+	float: left;
+}
+
+.da_reportPicAreaScroll_left div {
+	margin: auto;
+	position: relative;
+	top: 40%
+}
+
+.da_reportPicAreaScroll_right div {
+	margin: auto;
+	position: relative;
+	top: 40%
+}
+
+.da_reportPicArea {
+	margin: 1px;
+	width: 48%;
+	height: 87%;
+	border: 1px solid #d9d9d9;
+	float: left;
+	margin: auto;
+	position: relative;
+}
+
+.da_reportPicPageCount {
+	height: 18px;
+	width: 98%;
+	/*border: 1px solid #d9d9d9;*/
+	float: left;
+	margin: auto;
+	text-align: center;
+}
+
+.da_reportPic {
+	width: 99%;
+	height: 70%;
+	margin: auto;
+	/*border: 1px solid #d9d9d9;*/
+	display: block;
+	top: 0;
+}
+
+.da_reportPic span {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	display: block;
+}
+
+.da_reportPic span img {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	display: block;
+}
+
+
+.da_reportPicTool {
+	width: 100%;
+	display: block;
+	height: 24px;
+	position: absolute;
+	z-index: 2;
+	/*border: 1px solid red;*/
+}
+
+.da_reportPicDelPrompt {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	background-color: rgba(50, 50, 50, 0.3);
+	z-index: 45;
+	border: 1px solid red;
+}
+
+.da_delReportPic {
+	width: 22px;
+	height: 22px;
+	position: relative;
+	float: right;
+	margin-left: 0px;
+	margin-top: 0px;
+	background-color: rgba(50, 50, 50, 0);
+	display: block;
+}
+
+/*.da_updateReportPicDesc {
+	width: 22px;
+	height: 22px;
+	border: 1px solid red;
+	position: relative;
+	z-index: 5;
+	float: right;
+	margin-right: 0px;
+	margin-top: 0px;
+	list-style: none;
+	display: block;
+	top: 0px;
+}*/
+.da_reportPicDesc {
+	width: 99%;
+	height: 25%;
+	margin: 5px auto;
+	display: block;
+}
+
+.da_reportPicDescInput {
+	overflow: auto;
+	resize: none;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #d9d9d9;
+	font-size: 14px;
+	outline: #4cc0c1;
+	word-wrap: break-word;
+	font-family: Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+#da_reportToolBar {
+	margin: 5px;
+	position: relative;
+	height: 30px;
+	/*
+	border: 1px solid #d9d9d9;
+	z-index: 5;
+	width:99%*/
+}
+
+.da_reportToolBar_left {
+	float: left;
+	display: block;
+	margin: 3px;
+	position: relative;
+}
+
+.da_reportToolBar_right {
+	float: right;
+	display: block;
+	margin: 3px;
+	position: relative;
+}
+
+#da_reportToolBar .easyui-linkbutton {
+	width: 75px;
+}
+
+.ui-jqgrid tr.jqgrow td { /*jqGrid cell content wrap*/
+	white-space: normal !important;
+	height: auto;
+}
+
+th.ui-th-column div { /*jqGrid columns name wrap*/
+	white-space: normal !important;
+	height: auto !important;
+	padding: 0px;
+}
+
+th.ui-th-column div {
+	white-space: normal !important;
+	height: auto !important;
+	padding: 0px;
+}

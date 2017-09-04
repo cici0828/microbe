@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.system.mapper.UserMapper">
+	<!-- OK <resultMap type="UserCustom" id="userCustom" autoMapping="true"> 
+		</resultMap> -->
+
+	<!-- OK <resultMap type="UserCustom" id="userCustom" autoMapping="true"> 
+		<result column="gtel" property="usertel" /> </resultMap> -->
+
+	<!-- ERR <resultMap type="UserCustom" id="userCustom"> <result column="gtel" 
+		property="usertel" /> </resultMap> -->
+
+	<resultMap type="UserCustom" id="userCustom" autoMapping="true">
+		<result column="origrec" property="origrec"/>
+	</resultMap>
+
+
+	<sql id="getUser_where">
+		<if test="userCustom!=null">
+			<if test="userCustom.usrnam!=null and userCustom.usrnam!=''">
+				and usrnam=#{userCustom.usrnam}
+			</if>
+
+			<if test="passwd!=null and passwd!=''">
+				and passwd=#{passwd}
+			</if>
+
+			order by usrnam
+		</if>
+
+		<if test="userCustom==null">
+			and 1=2
+		</if>
+	</sql>
+
+	<select id="getUser" parameterType="UserVo" resultType="UserCustom">
+		<!-- like '%${}%' -->
+		select * from users
+		<where>
+			<include refid="getUser_where" />
+		</where>
+	</select>
+	
+	<select id="getMicrobeUser" resultType="UserCustom">
+	    select * from users where users.roleid in (14)
+	</select>
+</mapper>

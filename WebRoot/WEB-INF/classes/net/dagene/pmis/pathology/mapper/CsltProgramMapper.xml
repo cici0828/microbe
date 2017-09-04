@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="net.dagene.pmis.pathology.mapper.CsltProgramMapper">
+	<resultMap type="PatientinfoPY" id="patientinfoCustompy"
+		autoMapping="true"
+		extends="net.dagene.pmis.common.mapper.PatientInfoMapper.patientinfoCustom">
+	</resultMap>
+	<resultMap type="CsltBaseInfo" id="CsltBaseInfoMap" autoMapping="true"></resultMap>
+	<resultMap type="CsltSliceInfoCustom" id="csltSliceInfoCustom" autoMapping="true">
+		<result column="shortpic" property="shortpic" jdbcType="BLOB" />
+	</resultMap>
+	<resultMap type="CsltLogInfoCustom" id="csltLogInfoCustom" autoMapping="true"></resultMap>
+	<resultMap type="CsltResultCustom" id="csltResultCustom" autoMapping="true"></resultMap>
+	<resultMap type="CsltProgramCustom" id="CsltProgramResultMap" autoMapping="true">
+		<result column="pid" property="pid" />
+		<association property="patient" resultMap="patientinfoCustompy">
+		</association>
+		<association property="usercustom" resultMap="net.dagene.pmis.system.mapper.UserMapper.userCustom">
+		</association>
+	</resultMap>
+	<resultMap type="ExpertCustom" id="expertCustom" autoMapping="true"></resultMap>
+
+	<resultMap type="CsltGroupprogramModel" id="CsltGroupprogramMap" autoMapping="true">  		
+<!-- 		<association property="groupprogram" column="pid" javaType="CsltGroupprogramModel" >    
+            <result property="pid" column="pid" />  
+            <result property="pt_barcode" column="barcode" />  
+            <result property="readparty" column="readparty" />  
+            <result property="viewtype" column="viewtype" />  
+            <result property="expertfinishdate" column="expertfinishdate" />  
+            <result property="pt_result" column="pt_result" />
+            <result property="committogatherdate" column="committogatherdate" />  
+            <result property="committogatheruserid" column="committogatheruserid" />  
+            <result property="committogatherusername" column="committogatherusername" />  
+            <result property="togatherresult" column="togatherresult" />  
+            <result property="togatherbz" column="togatherbz" />  
+            <result property="togatherdate" column="togatherdate" />  
+            <result property="togatheruserid" column="togatheruserid" />  
+            <result property="togatherusername" column="togatherusername" />  
+        </association>   -->
+	</resultMap>
+	<resultMap type="CsltPatientinformation" id="PatinfoMap">
+		<result property="origrec" column="origrec" />  
+		<result property="samplefrom" column="samplefrom" />  
+		<result property="sampleto" column="sampleto" />  
+		<result property="bussinesstype" column="bussinesstype" />  
+		<result property="barcode" column="barcode" />  
+		<result property="patientname" column="patientname" />  
+		<result property="sex" column="sex" />  
+		<result property="clinicnme" column="clinicnme" />  
+		<result property="ageunit" column="ageunit" />  
+		<result property="age" column="age" />  
+		<result property="reportmethod" column="reportmethod" />  
+		<result property="doctor" column="doctor" />  
+		<result property="createddate" column="createddate" />  
+		<result property="diagnosis" column="diagnosis" />  
+		<result property="folderno" column="folderno" />  
+		<result property="bedno" column="bedno" />  
+		<result property="clinicid" column="clinicid" />  
+		<result property="senddate" column="senddate" />  	
+		<result property="sendstuff" column="sendstuff" />
+	</resultMap>
+	<resultMap type="CsltExpertPo" id="ExpertModelMap" autoMapping="true"></resultMap>
+	
+	<resultMap type="CsltDiagnosisListPo" id="getCsltDiagnosisListMap">
+        <result property="pid" column="pid" />  
+		<association property="groupprogram" resultMap="CsltGroupprogramMap"></association>  
+  		<association property="patinfo" resultMap="PatinfoMap"></association>
+  		<association property="baseinfo" resultMap="CsltBaseInfoMap"></association>
+	</resultMap>
+	<parameterMap type="ExecClstCommitExpertVo" id="sp_ptyClstcommitexpertMap">
+         <parameter property="vpid" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="barcode" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vexpertname" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vexperid" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="vnum" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="vreporttype" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vstate" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="issendsms" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="vfee" mode="IN" jdbcType="FLOAT"/>
+         <parameter property="vuserid" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vusername" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vcommittel" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="sucflag2" mode="OUT" jdbcType="INTEGER"/>
+         <parameter property="errInf2" mode="OUT" jdbcType="VARCHAR"/>
+    </parameterMap>
+  	<parameterMap type="ExceClstExpertCommitVo" id="sp_ptyClstExpertCommitMap">
+         <parameter property="vpid" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="barcode" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vexperid" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="vuserid" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vusername" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vnum" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="bz" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vstate" mode="IN" jdbcType="INTEGER"/>
+         <parameter property="vstatemean" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="vexpertname" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="expertcslt" mode="IN" jdbcType="VARCHAR"/>
+         <parameter property="folderno" mode="IN" jdbcType="VARCHAR"/>
+         
+         <parameter property="sucflag2" mode="OUT" jdbcType="INTEGER"/>
+         <parameter property="errinf2" mode="OUT" jdbcType="VARCHAR"/>
+	</parameterMap>
+	
+	<select id="execPtyClstCommitExpert" parameterMap="sp_ptyClstcommitexpertMap" statementType="CALLABLE">
+		call sp_ptyClstcommitexpert(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</select>
+	<select id="execPtyClstExpertCommit" parameterMap="sp_ptyClstExpertCommitMap" statementType="CALLABLE">
+		call sp_ptyClstExpertCommit(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</select>
+	<!-- 会诊数据列表 -->
+	<select id="getCsltDiagnosisList" parameterType="GetDataListVo" resultMap="getCsltDiagnosisListMap">
+		select 
+			p.*,pty.*,base.bid,base.clidata,base.clihistory,base.gross,base.first_option,base.gid,base.letter
+		from patientinformation p inner join t_pty_groupprogram pty on pty.pt_barcode=p.barcode
+		left join t_pty_cslt_baseinfo base on p.barcode=base.barcode	
+		where pty.jhh=0 and pty.dept=#{dept} and
+		pty.STATE in
+		<foreach item="item" index="index" collection="states" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<delete id="deleteDiagnosis" parameterType="String">
+		delete from t_pty_groupprogram where pt_barcode=#{barcode}
+	</delete>
+	<update id="updateDiagnosis" parameterType="CsltDiagnosisVo">
+		update t_pty_groupprogram
+		<set>
+			state = #{csltGroupprogramModel.state}
+		    <if test="csltGroupprogramModel.loginid != null">
+				,loginid = #{csltGroupprogramModel.loginid,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.loginname != null">
+				,loginname = #{csltGroupprogramModel.loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.logintel != null">
+				,logintel = #{csltGroupprogramModel.logintel,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.logindate != null">
+				,logindate = sysdate
+			</if>
+			
+		    <if test="csltGroupprogramModel.commitid != null">
+				,commitid = #{csltGroupprogramModel.commitid,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.commitname != null">
+				,commitname = #{csltGroupprogramModel.commitname,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.logintel != null">
+				,committel = #{csltGroupprogramModel.committel,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.commitdate != null">
+				,commitdate = sysdate
+			</if>
+			
+			<if test="csltGroupprogramModel.readparty != null">
+				,READPARTY = #{csltGroupprogramModel.readparty,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.viewtype != null">
+				,VIEWTYPE = #{csltGroupprogramModel.viewtype,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.expertfinishdate != null">
+				,EXPERTFINISHDATE = #{csltGroupprogramModel.expertfinishdate,jdbcType=DATE}
+			</if>
+			<if test="csltGroupprogramModel.committogatherdate != null">
+				,COMMITTOGATHERDATE = #{csltGroupprogramModel.committogatherdate,jdbcType=DATE}
+			</if>
+			<if test="csltGroupprogramModel.committogatheruserid != null">
+				,COMMITTOGATHERUSERID = #{csltGroupprogramModel.committogatheruserid,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.committogatherusername != null">
+				,COMMITTOGATHERUSERNAME = #{csltGroupprogramModel.committogatherusername,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.togatherresult != null">
+				,TOGATHERRESULT = #{csltGroupprogramModel.togatherresult,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.togatherbz != null">
+				,TOGATHERBZ = #{csltGroupprogramModel.togatherbz,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.togatherdate != null">
+				,TOGATHERDATE = #{csltGroupprogramModel.togatherdate,jdbcType=DATE}
+			</if>
+			<if test="csltGroupprogramModel.togatheruserid != null">
+				,TOGATHERUSERID = #{csltGroupprogramModel.togatheruserid,jdbcType=VARCHAR}
+			</if>
+			<if test="csltGroupprogramModel.togatherusername != null">
+				,TOGATHERUSERNAME = #{csltGroupprogramModel.togatherusername,jdbcType=VARCHAR}
+			</if>
+		</set>		
+		<where>
+			pt_barcode=#{barcode}
+		</where>
+	</update>
+	<!-- 患者基本信息 -->
+	<select id="getCsltpatinfo" parameterType="string" resultMap="PatinfoMap">
+		select * from patientinformation where BARCODE=#{barcode} and rownum=1
+	</select>
+	<!-- 专家列表 -->
+	<select id="getExpertModel" parameterType="BaseCsltVo" resultMap="ExpertModelMap">
+		select * from t_pty_expert where isdelete='0'		
+		<if test="key != null">
+			and area like #{key}
+		</if>
+	</select>
+	<update id="deleteCsltExpert" parameterType="int">
+		<!-- delete from t_pty_expert where id=#{id} -->
+		update t_pty_expert set isdelete='1' where id=#{id}
+	</update>
+	<insert id="insertCsltExpert" parameterType="CsltExpertVo" >	
+		insert into t_pty_expert 
+			(EXPERTNAME,SEX,EXPERTIDENTITY,TEL,EMAIL,TITLE,HOSPITAL,AREA,INTRODUCTION,DEPT
+			,GROUPTO,DUTY,HIREDATE,HIRETYPE,NATURE,MODES,AGREEMENT,WORK_CONTENT,ACCEPT
+			,CHARGE,SPECIALTY,ISDELETE,VIEWNUMPERDAY,ISWORK,VIEWNUM,FINISHDATE,USERID,FEE
+			,LBEGDATE,LENDDATE,HISTORY)
+		values 
+			(#{expert.expertname,jdbcType=VARCHAR},#{expert.sex,jdbcType=VARCHAR},#{expert.expertidentity,jdbcType=VARCHAR}
+			,#{expert.tel,jdbcType=VARCHAR},#{expert.email,jdbcType=VARCHAR},#{expert.title,jdbcType=VARCHAR}
+			,#{expert.hospital,jdbcType=VARCHAR},#{expert.area,jdbcType=VARCHAR},#{expert.introduction,jdbcType=VARCHAR}
+			,#{expert.dept,jdbcType=VARCHAR},#{expert.groupto,jdbcType=VARCHAR},#{expert.duty,jdbcType=VARCHAR}
+			,#{expert.hiredate,jdbcType=VARCHAR},#{expert.hiretype,jdbcType=VARCHAR},#{expert.nature,jdbcType=VARCHAR}
+			,#{expert.modes,jdbcType=VARCHAR},#{expert.agreement,jdbcType=VARCHAR},#{expert.work_countent,jdbcType=VARCHAR}
+			,#{expert.accept,jdbcType=VARCHAR},#{expert.charge,jdbcType=VARCHAR},#{expert.specialty,jdbcType=VARCHAR}
+			,#{expert.isdelete,jdbcType=VARCHAR},#{expert.viewnumperday,jdbcType=FLOAT},#{expert.iswork,jdbcType=VARCHAR}
+			,#{expert.viewnum,jdbcType=NUMERIC},#{expert.finishdate,jdbcType=DATE},#{expert.userid,jdbcType=VARCHAR}
+			,#{expert.fee,jdbcType=FLOAT},#{expert.lbegdate,jdbcType=DATE},#{expert.lenddate,jdbcType=DATE}
+			,#{expert.history,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateCsltExpert">
+		update t_pty_expert
+		<set>
+			<if test="expert.expertname != null">
+				EXPERTNAME = #{expert.expertname,jdbcType=VARCHAR},
+			</if>
+			<if test="expert.tel != null">
+				tel = #{expert.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="expert.title != null">
+				title = #{expert.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="expert.sex != null">
+				sex = #{expert.sex,jdbcType=VARCHAR},
+			</if>
+			<if test="expert.nature != null">
+				NATURE = #{expert.nature,jdbcType=VARCHAR},
+			</if>
+			<if test="expert.viewnum != null">
+				VIEWNUM = #{expert.viewnum,jdbcType=INTEGER},
+			</if>
+			<if test="expert.finishdate != null">
+				FINISHDATE = #{expert.finishdate,jdbcType=DATE},
+			</if>
+			<if test="expert.fee != null">
+				FEE = #{expert.fee,jdbcType=FLOAT},
+			</if>
+			<if test="expert.history != null">
+				HISTORY = #{expert.history,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<where>id=#{expert.id}</where>
+	</update>
+	
+	<!-- 会诊切片 -->	
+	<select id="getCsltSliceList" parameterType="BaseCsltVo" resultMap="csltSliceInfoCustom">
+		select dsid,dsno,diancode,scandate, inputdate,inputuserid,inputusername,provider,viewmode,ds_pid,inputudept,shortpicurl,slice_url,
+		slicestate,slicedesc,slicestate
+		from t_pty_slice where diancode=#{barcode} order by dsid
+	</select>
+	<delete id="deleteCsltSliceList" parameterType="String">
+	    delete from t_pty_slice where diancode=#{barcode} 
+	</delete>
+	<insert id="insertCsltSlice" parameterType="csltSliceInfoCustom">
+	     insert into t_pty_slice(dsno, diancode, ds_pid, shortpicurl, slicedesc, inputdate, provider)
+         values(#{dsno,jdbcType=VARCHAR}, #{diancode, jdbcType=VARCHAR}, #{ds_pid, jdbcType=VARCHAR}, #{shortpicurl, jdbcType=VARCHAR}
+         , #{slicedesc, jdbcType=VARCHAR}, sysdate, #{provider, jdbcType=VARCHAR})
+	</insert>
+	<select id="getCsltSliceSmallPic" parameterType="int" resultMap="csltSliceInfoCustom">
+		select dsid, shortpic from t_pty_slice where dsid=#{dsid}
+	</select>
+
+	<select id="getCsltGroupprogramByBarcode" parameterType="String" resultMap="CsltGroupprogramMap">
+		SELECT * FROM T_PTY_GROUPPROGRAM WHERE pt_barcode=#{barcode} and rownum=1 order by pid desc
+		<!-- SELECT * FROM T_PTY_GROUPPROGRAM WHERE pt_barcode=#{barcode} and state!=10 and rownum=1 order by pid desc -->
+	</select>
+	<insert id="insertCsltGroupprogram" parameterType="CsltGroupprogramVo" >		
+		INSERT INTO T_PTY_GROUPPROGRAM
+		(pt_barcode, state,loginid,loginname,logindate,picnum,jhh,logintel,commitdate,viewtype, dept)
+		VALUES
+		(#{pt_barcode,jdbcType=VARCHAR},#{state,jdbcType=NUMERIC},#{loginid,jdbcType=VARCHAR},#{loginname,jdbcType=VARCHAR},sysdate,#{picnum,jdbcType=NUMERIC},#{jhh,jdbcType=VARCHAR},#{logintel,jdbcType=VARCHAR},sysdate,#{viewtype,jdbcType=VARCHAR},
+		#{dept,jdbcType=VARCHAR})
+	</insert>
+
+	<resultMap type="CsltModel" id="getCsltModelMap" autoMapping="true"></resultMap>
+	<select id="getCsltModel" parameterType="CsltModel" resultMap="getCsltModelMap">
+		SELECT * FROM t_pty_cslt WHERE barcode=#{barcode} and cstate=#{cstate} and rownum=1 order by ccid desc
+	</select>
+	<insert id="insertCslt" parameterType="CsltModel" > 
+		INSERT INTO t_pty_cslt
+		(PID,EXPERTNAME,EXPERTID,COMMITDATE,ATTACHMENT,CSTATE,RSLT_COMMENTS,EXPERTCSLT,FOLDERNO,BARCODE,EXPERTCSLT_EN)
+		VALUES
+		(#{pid,jdbcType=NUMERIC},#{expertname,jdbcType=VARCHAR},#{expertid,jdbcType=VARCHAR},sysdate,#{attachment,jdbcType=BLOB},#{cstate,jdbcType=VARCHAR},#{rslt_comments,jdbcType=VARCHAR},#{expertcslt,jdbcType=VARCHAR},#{folderno,jdbcType=VARCHAR},#{barcode,jdbcType=VARCHAR},#{expertcslt_en,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 图片属性查、增加、修改-->
+	<resultMap type="CsltPicPo" id="getCsltPicsMap" autoMapping="true"></resultMap>
+	<select id="getCsltPics" parameterType="CsltPicVo" resultMap="getCsltPicsMap">
+		select
+		 t1.ccid,t1.folderno,t1.ordno,t1.type,t1.sortorder,t1.display,t1.localdir,t1.id,t1.syn,t1.describe_en ,t1.describe
+		from t_pty_csltpic t1,t_pty_cslt t2 where t1.ccid=t2.ccid and t2.barcode=#{barcode}  and display=#{display}
+	</select> 
+	<insert id="insertCsltPic" parameterType="CsltPicModel">
+		INSERT INTO t_pty_csltpic
+		(CCID,ID,PICTURE,FOLDERNO,ORDNO,TYPE,SORTORDER,DISPLAY,LOCALDIR,DESCRIBE,SYN,DESCRIBE_EN) 
+		VALUES 
+		(#{ccid,jdbcType=NUMERIC},#{id,jdbcType=VARCHAR},#{picture,jdbcType=BLOB},#{folderno,jdbcType=VARCHAR},#{orderno,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{sortorder,jdbcType=NUMERIC},#{display,jdbcType=NUMERIC},#{localdir,jdbcType=VARCHAR},#{describe,jdbcType=VARCHAR},sysdate,#{describe_en,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateCsltPic" parameterType="CsltPicModel">
+		UPDATE t_pty_csltpic
+		<set>
+			SYN = sysdate
+			<if test="ccid != null">
+				,ccid = #{ccid,jdbcType=NUMERIC}
+			</if>
+			<if test="picture != null">
+				,picture = #{picture,jdbcType=BLOB}
+			</if>
+			<if test="folderno != null">
+				,folderno = #{folderno,jdbcType=VARCHAR}
+			</if>
+			<if test="orderno != null">
+				,ORDNO = #{orderno,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null">
+				,TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="sortorder != null">
+				,SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+			<if test="display != null">
+				,DISPLAY = #{display,jdbcType=NUMERIC}
+			</if>
+			<if test="localdir != null">
+				,LOCALDIR = #{localdir,jdbcType=VARCHAR}
+			</if>
+			<if test="describe != null">
+				,DESCRIBE = #{describe,jdbcType=VARCHAR}
+			</if>
+			<if test="describe_en != null">
+				,DESCRIBE_EN = #{describe_en,jdbcType=VARCHAR}
+			</if>
+		</set>
+		<where>
+			ID=#{id}
+		</where>
+	</update>
+
+	<!-- 获取相关翻译数据的状态日志 -->
+	<resultMap type="CsltLog" id="getCsltLogResultMap" autoMapping="true"></resultMap>
+	<select id="getCsltLog" parameterType="String" resultMap="getCsltLogResultMap">
+		select * from t_pty_cslt_log where barcode=#{barcode} order by logid desc
+	</select>
+
+	<!-- 获取翻译数据统计 -->
+	<resultMap type="TranslateTotalPo" id="getTranslateTotalResultMap" autoMapping="true"></resultMap>
+	<select id="getTranslateTotal" parameterType="GetDataListVo" resultMap="getTranslateTotalResultMap">
+		select state,count(state) as count from(
+		select
+		nvl(t1.STATE,10) AS STATE from patientinformation t2
+		left join
+		t_pty_csltinfo_en t1 on t2.barcode=t1.barcode
+		where t2.origrec in(
+		select pt.patientorigrec from patienttests pt where pt.statusy=1 and
+		(testcode='1176' or testcode='3003131')
+		)
+		) v1 group by state
+	</select>
+
+	<!-- 获取翻译数据列表 -->
+	<resultMap type="TranslatePo" id="getTranslateListResultMap" autoMapping="true"></resultMap>
+	<select id="getTranslateList" parameterType="GetDataListVo" resultMap="getTranslateListResultMap">
+		select distinct(BARCODE),EBID,CLIDATA,CLIHISTORY,GROSS,FIRST_OPTION,GID
+		,PATIENTNAME,SEX,AGE,REMARK,CLIRESULT_EN,BACKREASON,STATE,DOCTOR,DOCTORID
+		,RSLTFROM,FOLDERNO,SENDSTUFF,COMMITDATE,CLIRESULT_CN,LETTER,sampleto,samplefrom,senddate,picnum
+		from(
+		select
+		nvl(t1.EBID,0) as EBID,t1.CLIDATA,t1.CLIHISTORY,t1.GROSS,t1.FIRST_OPTION,t1.GID,t2.BARCODE,t2.PATIENTNAME
+		,t2.SEX,t2.AGE,t1.REMARK,t1.CLIRESULT_EN,t1.BACKREASON,nvl(t1.STATE,10)
+		AS STATE,t1.DOCTOR,t1.DOCTORID
+		,t1.RSLTFROM,t1.FOLDERNO,t1.SENDSTUFF,nvl(t1.COMMITDATE,sysdate) AS
+		COMMITDATE,t1.CLIRESULT_CN,t1.LETTER,t2.sampleto,t2.samplefrom,t2.senddate
+		,nvl(t3.picnum,0) as picnum
+		from patientinformation t2
+		left join t_pty_csltinfo_en t1 on
+		t2.barcode=t1.barcode
+		left join t_pty_groupprogram t3 on t1.barcode=t3.pt_barcode
+		where 
+		<!-- t1.barcode in('112799999','144779368','144317166','144403229','144331587','144396036','144387951')
+		and-->
+		t2.origrec in(
+		select pt.patientorigrec from
+		patienttests pt where pt.statusy=1 and
+		(testcode='1176' or
+		testcode='3003131')
+		) 
+		) v1
+		where
+<!-- 		<if test="barcode != null">
+		barcode like #{barcode} and
+		</if> -->
+		v1.STATE in
+		<foreach item="item" index="index" collection="states" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by STATE desc,sampleto desc,senddate desc
+	</select>
+
+
+	<!-- 获取需要翻译审核的数据列表 -->
+	<resultMap type="CsltInfotPo" id="getCsltAuditResultMap" autoMapping="true"></resultMap>
+	<select id="getCsltAuditList" parameterType="CsltInfoVo" resultMap="getCsltAuditResultMap">
+		select
+		t1.EBID,t1.CLIDATA,t1.CLIHISTORY,t1.GROSS,t1.FIRST_OPTION,t1.GID,t1.BARCODE,t2.PATIENTNAME
+		,t2.SEX,t1.AGE,t1.REMARK,t1.CLIRESULT_EN,t1.BACKREASON,t1.STATE,t1.DOCTOR,t1.DOCTORID
+		,t1.RSLTFROM,t1.FOLDERNO,t1.SENDSTUFF,t1.COMMITDATE,t1.CLIRESULT_CN,t1.LETTER
+		FROM
+		(select * from T_PTY_CSLTINFO_EN where STATE=12 union
+		select * from T_PTY_CSLTINFO_EN where STATE=18) t1 left join
+		patientinformation t2 ON
+		t1.BARCODE=t2.BARCODE
+		order by t1.EBID desc
+	</select>
+
+	<!-- 获取需要翻译审核的一条英文数据 -->
+	<resultMap type="CsltInfotPo" id="getCsltAuditViewResultMap" autoMapping="true"></resultMap>
+	<select id="getCsltAuditView" parameterType="int" resultMap="getCsltAuditViewResultMap">
+		select
+		EBID,CLIDATA,CLIHISTORY,GROSS,FIRST_OPTION,GID,BARCODE,PATIENTNAME,SEX,AGE,REMARK,CLIRESULT_EN,BACKREASON
+		,STATE,DOCTOR,DOCTORID,RSLTFROM,FOLDERNO,SENDSTUFF,COMMITDATE,CLIRESULT_CN,LETTER
+		from T_PTY_CSLTINFO_EN where EBID=#{ebid}
+	</select>
+	<select id="getCsltAuditViewByBarcode" parameterType="string" resultMap="getCsltAuditViewResultMap">
+		select
+		EBID,CLIDATA,CLIHISTORY,GROSS,FIRST_OPTION,GID,BARCODE,PATIENTNAME,SEX,AGE,REMARK,CLIRESULT_EN,BACKREASON
+		,STATE,DOCTOR,DOCTORID,RSLTFROM,FOLDERNO,SENDSTUFF,COMMITDATE,CLIRESULT_CN,LETTER
+		from T_PTY_CSLTINFO_EN where BARCODE=#{barcode} and rownum=1
+	</select>
+
+	<!-- 获取需要翻译审核的一条中文数据 -->
+	<resultMap type="CsltInfotPo" id="getCsltAuditCnViewResultMap" autoMapping="true"></resultMap>
+	<select id="getCsltAuditCnView" parameterType="string" resultMap="getCsltAuditCnViewResultMap">
+		select
+		t1.bid,t1.CLIDATA,t1.CLIHISTORY,t1.GROSS,t1.FIRST_OPTION,t1.GID,t1.BARCODE,t2.PATIENTNAME
+		,t2.SEX,t2.AGE,t2.DOCTOR,t2.FOLDERNO,t2.SENDSTUFF,t1.LETTER
+		from
+		t_pty_cslt_baseinfo t1 right join patientinformation t2 on
+		t1.BARCODE=t2.BARCODE
+		where t2.BARCODE=#{BARCODE}
+	</select>
+
+	<!--  翻译信息增、改 -->
+	<insert id="insertCsltInfo" parameterType="CsltInfoVo">
+		INSERT INTO T_PTY_CSLTINFO_EN
+		(CLIDATA,CLIHISTORY,GROSS,FIRST_OPTION,GID,BARCODE,PATIENTNAME,SEX,AGE,REMARK,CLIRESULT_EN,BACKREASON,STATE,DOCTOR,DOCTORID,RSLTFROM,FOLDERNO,SENDSTUFF,COMMITDATE,CLIRESULT_CN,LETTER) 
+		VALUES 
+		(#{clidata,jdbcType=VARCHAR},
+		#{clihistory,jdbcType=VARCHAR},
+		#{gross,jdbcType=VARCHAR},
+		#{first_option,jdbcType=VARCHAR},
+		#{gid,jdbcType=NUMERIC},
+		#{barcode,jdbcType=VARCHAR},
+		#{patientname,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{age,jdbcType=NUMERIC},
+		#{remark,jdbcType=VARCHAR},
+		#{cliresult_en,jdbcType=VARCHAR},
+		#{backreason,jdbcType=VARCHAR},
+		#{state,jdbcType=VARCHAR},
+		#{doctor,jdbcType=VARCHAR},
+		#{doctorid,jdbcType=VARCHAR},
+		#{rsltfrom},
+		#{folderno,jdbcType=VARCHAR},
+		#{sendstuff,jdbcType=VARCHAR},
+		sysdate,
+		#{cliresult_cn,jdbcType=VARCHAR},
+		#{letter,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateCsltInfo" parameterType="CsltInfoVo">
+		UPDATE T_PTY_CSLTINFO_EN
+		<set>
+			STATE=#{state},COMMITDATE = sysdate
+			<if test="clidata != null">
+				,CLIDATA = #{clidata,jdbcType=VARCHAR}
+			</if>
+			<if test="clihistory != null">
+				,CLIHISTORY = #{clihistory,jdbcType=VARCHAR}
+			</if>
+			<if test="gross != null">
+				,GROSS = #{gross,jdbcType=VARCHAR}
+			</if>
+			<if test="first_option != null">
+				,FIRST_OPTION = #{first_option,jdbcType=VARCHAR}
+			</if>
+			<if test="patientname != null">
+				,PATIENTNAME = #{patientname,jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null">
+				,SEX = #{sex,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				,REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="sendstuff != null">
+				,SENDSTUFF = #{sendstuff,jdbcType=VARCHAR}
+			</if>
+			<if test="cliresult_cn != null">
+				,CLIRESULT_CN = #{cliresult_cn,jdbcType=VARCHAR}
+			</if>
+			<if test="cliresult_en != null">
+				,CLIRESULT_EN = #{cliresult_en,jdbcType=VARCHAR}
+			</if>
+			<if test="letter != null">
+				,LETTER = #{letter,jdbcType=VARCHAR}
+			</if>
+			<if test="barcode != null">
+				,BARCODE = #{barcode,jdbcType=VARCHAR}
+			</if>
+		</set>
+		<where>
+			EBID=#{ebid}
+		</where>
+	</update>
+
+	<insert id="ptyCsltLog" parameterType="CsltLogInfoCustom">
+		INSERT INTO t_pty_cslt_log
+		(LOGPID,OP_USERID,OP_USERNAME,OP_DATE
+		,OP_BZ,OP_STATE_MEAN,OP_STATE,CSLTID,BARCODE)
+		VALUES
+		(#{logpid,jdbcType=NUMERIC},#{op_userid,jdbcType=VARCHAR},#{op_username,jdbcType=VARCHAR},sysdate
+		,#{op_bz,jdbcType=VARCHAR},#{op_state_mean,jdbcType=VARCHAR},#{op_state,jdbcType=VARCHAR},#{csltid,jdbcType=NUMERIC}
+		,#{barcode,jdbcType=VARCHAR})
+	</insert>
+
+	<!--补充信息处理 -->
+	<insert id="insertCsltBaseInfo" parameterType="CsltInfoVo">
+		INSERT INTO t_pty_cslt_baseinfo
+		(CLIDATA,CLIHISTORY,GROSS,FIRST_OPTION
+		,GID,BARCODE,LETTER)
+		VALUES
+		(#{clidata,jdbcType=VARCHAR},#{clihistory,jdbcType=VARCHAR},#{gross,jdbcType=VARCHAR},#{first_option,jdbcType=VARCHAR}
+		,#{gid,jdbcType=NUMERIC},#{barcode},#{letter,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateCsltBaseInfo" parameterType="CsltInfoVo">
+		UPDATE t_pty_cslt_baseinfo
+		<set>
+			<if test="clidata != null">
+				CLIDATA = #{clidata,jdbcType=VARCHAR}
+			</if>
+			<if test="clihistory != null">
+				,CLIHISTORY = #{clihistory,jdbcType=VARCHAR}
+			</if>
+			<if test="gross != null">
+				,GROSS = #{gross,jdbcType=VARCHAR}
+			</if>
+			<if test="first_option != null">
+				,FIRST_OPTION = #{first_option,jdbcType=VARCHAR}
+			</if>
+			<if test="gid != null">
+				,GID = #{gid,jdbcType=NUMERIC}
+			</if>
+			<if test="letter != null">
+				,LETTER = #{letter,jdbcType=VARCHAR}
+			</if>
+		</set>
+		<where>
+			BARCODE=#{barcode}
+		</where>		
+	</update>
+
+	<sql id="getCsltProgram_where">
+		p.barcode=pg.pt_barcode
+		<if test="csltProgramCustom!=null">
+			<if test="state_old!=null and state_old!=''">
+				and state=#{state_old}
+			</if>
+
+			<if
+				test="csltProgramCustom.expertid!=null and csltProgramCustom.expertid!=''">
+				and expertid=#{csltProgramCustom.expertid}
+			</if>
+
+			<if test="csltProgramCustom.pid!=null">
+				and pid=#{csltProgramCustom.pid}
+			</if>
+		</if>
+
+		<if test="csltProgramCustom==null">
+			and 1=2
+		</if>
+		order by pid
+	</sql>
+
+	<select id="getCsltProgramList" parameterType="CsltProgramVo"
+		resultMap="CsltProgramResultMap">
+		<!-- like '%${}%' -->
+		select u.usertel,
+		pg.*,p.origrec as porigrec
+		,p.patientname,p.age,p.ageunit,p.sex,p.folderno,p.samplefrom,p.sendstuff
+		from
+		t_pty_groupprogram
+		pg left join users u on
+		u.usrnam=pg.loginid,patientinformation p
+		<where>
+			<include refid="getCsltProgram_where" />
+		</where>
+	</select>
+
+	<update id="updateCsltProgram" parameterType="CsltProgramVo">
+		update t_pty_groupprogram
+		<set>
+			<if test="csltProgramCustom.state!=null and csltProgramCustom.state!=''">
+				,state=${csltProgramCustom.state}
+			</if>
+			<if test="csltProgramCustom.expertfinishdate!=null">
+				,state=sysdate
+			</if>
+		</set>
+		<where>
+			<include refid="getCsltProgram_where" />
+		</where>
+	</update>
+
+	<select id="getCsltBaseInfo" parameterType="CsltProgramVo"
+		resultMap="CsltBaseInfoMap">
+		select * from T_PTY_CSLT_BASEINFO where
+		gid=#{csltProgramCustom.pid}
+	</select>
+	
+	<select id="getCsltSliceCount" parameterType="string" resultType="int">
+		select count(*) from
+		t_pty_slice where DIANCODE=#{barcode}
+	</select>
+	<select id="getCsltSliceInfo" parameterType="CsltProgramVo" resultMap="csltSliceInfoCustom">
+		select diancode,dsno,ds_pid,shortpicurl,dsid from
+		t_pty_slice where
+		diancode=#{csltProgramCustom.pt_barcode} order by
+		dsid
+	</select>
+
+	<select id="getSliceShortPicByDSID" parameterType="int" resultMap="csltSliceInfoCustom">
+		select dsid,shortpic from t_pty_slice where dsid=#{dsid}
+	</select>
+	
+	<select id="getCsltLogInfoCustomByPID" parameterType="int"
+		resultMap="csltLogInfoCustom">
+		select * from t_pty_cslt_log where logpid=#{logid} order by
+		logid
+	</select>
+
+	<sql id="getCsltResultWhere">
+		<if test="csltResultCustom!=null">
+			<if test="csltResultCustom.pid!=null and csltResultCustom.pid!=''">
+				and pid=#{csltResultCustom.pid}
+			</if>
+
+			<if
+				test="csltResultCustom.expertid!=null and csltResultCustom.expertid!=''">
+				and expertid=#{csltResultCustom.expertid}
+			</if>
+
+			<if test="csltResultCustom.barcode!=null and csltResultCustom.barcode!=''">
+				and barcode=#{csltResultCustom.barcode}
+			</if>
+
+			<if test="cstate_old!=null and cstate_old!=''">
+				and cstate=#{cstate_old}
+			</if>
+
+			<if
+				test="csltResultCustom.folderno!=null and csltResultCustom.folderno!=''">
+				and folderno=#{csltResultCustom.folderno}
+			</if>
+		</if>
+
+		<if test="csltResultCustom==null">1=2</if>
+	</sql>
+
+	<select id="getCsltResultList" parameterType="CsltResultVo"
+		resultMap="csltResultCustom">
+		select * from t_pty_cslt
+		<where>
+			<include refid="getCsltResultWhere" />
+		</where>
+		order by ccid
+	</select>
+
+	<insert id="insertResult" parameterType="CsltResultVo">
+		insert into
+		t_pty_cslt(pid,expertname,expertid,commitdate,cstate,expertcslt,folderno,barcode,rslt_comments)
+		values(#{csltResultCustom.pid},#{csltResultCustom.expertname},#{csltResultCustom.expertid},sysdate,0
+		,#{csltResultCustom.expertcslt},#{csltResultCustom.folderno}
+		,#{csltResultCustom.barcode},#{csltResultCustom.rslt_comments})
+	</insert>
+
+	<delete id="deleteReuslt" parameterType="CsltResultVo">
+		delete from t_pty_cslt
+		<where>
+			<include refid="getCsltResultWhere" />
+		</where>
+	</delete>
+
+	<update id="updateResult" parameterType="CsltResultVo">
+		update t_pty_cslt
+		<set>
+			commitdate=sysdate
+			<if test="csltResultCustom.expertcslt!=null">
+				,expertcslt=#{csltResultCustom.expertcslt}
+			</if>
+
+			<if test="csltResultCustom.cstate!=null and csltResultCustom.cstate!=''">
+				,cstate=#{csltResultCustom.cstate}
+			</if>
+
+			<if
+				test="csltResultCustom.rslt_comments!=null and csltResultCustom.rslt_comments!=''">
+				,rslt_comments=#{csltResultCustom.rslt_comments}
+			</if>
+		</set>
+		<where>
+			<include refid="getCsltResultWhere" />
+		</where>
+	</update>
+
+	<select id="getExpertList" parameterType="int" resultMap="expertCustom">
+		select * from t_pty_expert
+		<where>
+			<if test="value!=null">
+				and id=${value}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateExpert" parameterType="ExpertVo">
+		update t_pty_expert
+		<set>
+			<if test="expertCustom.viewnumperday!=null">
+				,viewnumperday=${expertCustom.viewnumperday}
+			</if>
+
+			<if test="expertCustom.finishdate!=null">
+				,finishdate=${expertCustom.finishdate}
+			</if>
+
+			<if test="expertCustom.viewnum!=null">
+				,viewnum=${expertCustom.viewnum}
+			</if>
+		</set>
+	</update>
+
+	<select id="getCsltPicInfoListByCCID" parameterType="int" resultType="AttcPicture">
+		select id,folderno,ordno,type,sortorder,display,describe,localdir
+		from t_pty_csltpic
+		where ccid=#{value} order by display desc,sortorder
+	</select>
+
+	<select id="getCsltPicByID" parameterType="string" resultType="AttcPicture">
+		select id,picture from t_pty_csltpic where id=#{value} order by
+		sortorder
+	</select>
+	
+	<select id="getMicrobeResultByBarcode" parameterType="string"  resultType="MicrobeModel">
+	   select * from t_microbe_main where mic_barcode=#{value} order by mguid
+	</select>
+	
+	<delete id="deleteMicrobeResult" parameterType="MicrobeModel">
+	   delete from t_microbe_main
+	   <where>
+			<if test="mic_barcode!=null and mic_barcode!=''">
+				and mic_barcode=#{mic_barcode}
+			</if>	
+			
+			<if test="microbecode!=null and microbecode!=''">
+			    and microbecode=#{microbecode}
+			</if>   
+	   </where>
+	</delete>
+
+	<!-- <update id="updateCsltSMS" parameterType="updateCsltSMS"> update t_pty_expert_sms 
+		set samplenum=${csltSMSCustom.samplenum} where expertid=%{csltSMSCustom.expertid} 
+		</update> -->
+</mapper>
